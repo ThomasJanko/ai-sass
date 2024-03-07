@@ -6,7 +6,11 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SideBar from "./SideBar";
 import { useEffect, useState } from "react";
 
-const MobilNav = () => {
+interface MobilNavProps {
+    apiLimitCount: number;
+}
+
+const MobilNav = ({ apiLimitCount = 0 }: MobilNavProps) => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -22,8 +26,8 @@ const MobilNav = () => {
                 <Menu size={24} />
             </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="p-0">
-            <SideBar />
+        <SheetContent side="left" className="p-0 text-white">
+            <SideBar apiLimitCount={apiLimitCount} />
         </SheetContent>
     </Sheet>
     )

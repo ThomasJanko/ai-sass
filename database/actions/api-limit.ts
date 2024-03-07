@@ -2,9 +2,7 @@
 import { auth } from "@clerk/nextjs";
 import apiLimitModel from "../models/apiLimit.model";
 import { connectToDatabase } from "../mongoose";
-
-
-const MAX_FREE_COUNTS = 5;
+import { MAX_FREE_COUNTS } from "../constants";
 
 export const increaseApiLimit = async () => {
     const { userId } = auth();
@@ -43,5 +41,23 @@ export const checkApiLimit = async () => {
     }
 
 };
+
+export const getApiLimitCount = async () => {
+    const { userId } = auth();
+
+    if(!userId) return 0;
+
+    try{
+        await connectToDatabase();
+
+        const userApiLimit = await apiLimitModel.findOne({userId});
+
+        if(!userApiLimit) return 0;
+        return userApiLimit.count;
+
+    } catch(err){
+        console.log(err);
+    }
+}
 
   

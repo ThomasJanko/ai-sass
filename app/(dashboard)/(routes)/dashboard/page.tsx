@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, Code, ImageIcon, MessageSquare, Music, VideoIcon } from "lucide-react";
 
 
-const tools = [
+export const tools = [
   {
     label: "Conversation",
     icon: MessageSquare,

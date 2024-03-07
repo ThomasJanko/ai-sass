@@ -20,10 +20,12 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/UserAvatar";
 import { BotAvatar } from "@/components/BotAvatar";
 import ReactMarkdown from "react-markdown";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const CodePage = () => {
 
     const router = useRouter();
+    const proModal = useProModal();
     const [messages, setMessages] = useState<any[]>([]);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -50,9 +52,11 @@ const CodePage = () => {
             form.reset();
 
         } catch(error: any){
-            //TODO: Open Pro Modal
-            console.error(error);
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }
         } finally {
+            // refresh the entier server components (DB data)
             router.refresh();
         }
     }
