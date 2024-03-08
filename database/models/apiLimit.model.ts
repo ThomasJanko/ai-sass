@@ -1,6 +1,5 @@
 
-
-//user Model mongoose
+//apiLimit Model mongoose
 
 import mongoose from "mongoose";
 
