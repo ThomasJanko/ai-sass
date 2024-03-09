@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 
 interface MobilNavProps {
     apiLimitCount: number;
+    isPro: boolean;
 }
 
-const MobilNav = ({ apiLimitCount = 0 }: MobilNavProps) => {
+const MobilNav = ({ apiLimitCount = 0, isPro = false }: MobilNavProps) => {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -18,6 +19,7 @@ const MobilNav = ({ apiLimitCount = 0 }: MobilNavProps) => {
     }, []);
 
     if(!isMounted) return null;
+    // if(isPro) return null;
 
     return (
     <Sheet>
@@ -27,7 +29,7 @@ const MobilNav = ({ apiLimitCount = 0 }: MobilNavProps) => {
             </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0 text-white">
-            <SideBar apiLimitCount={apiLimitCount} />
+            <SideBar apiLimitCount={apiLimitCount} isPro={isPro} />
         </SheetContent>
     </Sheet>
     )
