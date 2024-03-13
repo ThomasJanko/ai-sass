@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/components/Loader";
 import { useProModal } from "@/hooks/use-pro-modal";
+import toast from "react-hot-toast";
 
 const MusicPage = () => {
 
@@ -43,6 +44,8 @@ const MusicPage = () => {
         } catch(error: any){
             if(error?.response?.status === 403){
                 proModal.onOpen();
+            } else {
+                toast.error("Something went wrong. Please try again.")
             }
         } finally {
             // refresh the entier server components (DB data)
